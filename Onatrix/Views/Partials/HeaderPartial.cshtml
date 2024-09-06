@@ -1,0 +1,32 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Cms.Core.Models.PublishedContent
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@{
+    var logoImageurl = Model?.Value<IPublishedContent>("logoImage")?.Url() ?? "";
+}
+<section class="header">
+    <div class="upper-header">
+        <div class="container">
+            <p>Klarabergsviadukten 90, 111 64 Stockholm</p>
+            <div class="social-icons">
+                <a href=""><i class="fa-brands fa-facebook-f"></i></a>
+                <a href=""><i class="fa-brands fa-twitter"></i></a>
+                <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+    <div class="lower-header">
+        <div class="container">
+            <img src="@logoImageurl" alt="Onatrix Logo">
+            <nav class="header-nav">
+                <a href="">About</a>
+                <a href="">Services</a>
+                <a href="">Projects</a>
+                <a href="">Contact</a>
+            </nav>
+            <button class="search-btn">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </div>
+    </div>
+</section>

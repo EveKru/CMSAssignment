@@ -1,11 +1,12 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models.PublishedContent
 @{
 	Layout = null;
     var pageTitle = !string.IsNullOrEmpty(ViewBag.Title) ? $"Ontarix | {ViewBag.Title}" : "Onatrix";
 }
 
-<html lang="eng">
+<html lang="en">
 	<head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,13 +17,13 @@
 	<body>
         <div class="wrapper">
             <header>
-
+                @Html.Partial("HeaderPartial")
             </header>
             <main>
                 @RenderBody()
             </main>
             <footer>
-
+                @Html.Partial("FooterPartial")
             </footer>
         </div>
         <script src="/scripts/main.js"></script>
