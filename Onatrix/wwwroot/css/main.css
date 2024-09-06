@@ -1,0 +1,103 @@
+/* CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Optional but useful for consistent box-sizing */
+}
+
+.wrapper {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
+
+/* Approximate Bootstrap-like Container */
+.container {
+    width: 100%;
+    max-width: 90%; /* Full-width container, with a default max-width */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 2%;
+    padding-right: 2%;
+    box-sizing: border-box;
+}
+
+/* Bootstrap-like Breakpoints (Approximation) */
+@media (min-width: 1200px) {
+    .container {
+        max-width: 70%; /* Roughly equivalent to 1140px for large screens */
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .container {
+        max-width: 75%; /* Roughly equivalent to 960px for medium screens */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .container {
+        max-width: 80%; /* Roughly equivalent to 720px for tablets */
+    }
+}
+
+@media (max-width: 767px) {
+    .container {
+        max-width: 95%; /* Wider container for smaller screens */
+    }
+}
+
+/*---------------header------------------*/
+.header {
+    
+}
+
+.header .upper-header {
+    background-color: #4F5955;
+}
+
+.header .upper-header .container {
+    display: flex;
+    justify-content: space-between;
+    background-color: #4F5955;
+    color: white;
+    align-items: center;
+    height: 3rem;
+}
+
+.header .upper-header .container .social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.header .upper-header .container .social-icons a {
+    color: white; 
+}
+
+.header .lower-header .container {
+    display: flex;
+    justify-content: space-between;
+    height: 4rem;
+    align-items: center;
+}
+
+.header .lower-header .container .header-nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.header .lower-header .container .header-nav a {
+    color: #4F5955; 
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.header .lower-header .container .search-btn {
+    color: #4F5955;
+    font-size: large;
+    background: none; 
+    border: none; 
+    cursor: pointer;
+}
+/*---------------header------------------*/
+
