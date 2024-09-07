@@ -1,23 +1,26 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IPublishedContent>
+@using Umbraco.Cms.Web.Common.PublishedModels
 @using Umbraco.Cms.Core.Models.PublishedContent
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
 @{
     var logoImageurl = Model?.Value<IPublishedContent>("logoImage")?.Url() ?? "";
 }
 <section class="header">
     <div class="upper-header">
         <div class="container">
-            <p>Klarabergsviadukten 90, 111 64 Stockholm</p>
+            <p>@Model?.Value("companyAdress")</p>
             <div class="social-icons">
-                <a href=""><i class="fa-brands fa-facebook-f"></i></a>
-                <a href=""><i class="fa-brands fa-twitter"></i></a>
-                <a href=""><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="@Model?.Value("facebookLink")"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="@Model?.Value("twitterLink")"><i class="fa-brands fa-twitter"></i></a>
+                <a href="@Model?.Value("linkedinLink")"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
         </div>
     </div>
     <div class="lower-header">
         <div class="container">
-            <img src="@logoImageurl" alt="Onatrix Logo">
+            <a href="/home">
+                <img src="@logoImageurl" alt="Onatrix Logo">
+            </a>
             <nav class="header-nav">
                 <a href="">About</a>
                 <a href="">Services</a>

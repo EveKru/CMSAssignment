@@ -101,3 +101,12 @@
 }
 /*---------------header------------------*/
 
+/*---------------footer------------------*/
+.footer {
+    height: 3rem;
+    color: white;
+    background-color: #0E0E0E;
+    align-content: center;
+}
+/*---------------footer------------------*/
+
