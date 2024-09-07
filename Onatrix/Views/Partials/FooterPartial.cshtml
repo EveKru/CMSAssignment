@@ -1,1 +1,9 @@
-﻿
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Cms.Core.Models.PublishedContent
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+<section class="footer">
+    <div class="container">
+        <p> © @Model.Value("copyrightText")</p>
+    </div>
+</section>
