@@ -2,8 +2,12 @@
 @using Umbraco.Cms.Core.Models.PublishedContent
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 
+@{
+     var footer = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "footer");
+}
+
 <section class="footer">
     <div class="container">
-        <p> © @Model.Value("copyrightText")</p>
+        <p> © @footer?.Value("copyrightText")</p>
     </div>
 </section>

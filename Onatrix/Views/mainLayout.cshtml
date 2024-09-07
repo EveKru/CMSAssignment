@@ -17,13 +17,13 @@
 	<body>
         <div class="wrapper">
             <header>
-                @Html.Partial("HeaderPartial", Model)
+                @await Html.PartialAsync("HeaderPartial", Model)
             </header>
             <main>
                 @RenderBody()
             </main>
             <footer>
-                @Html.Partial("FooterPartial", Model)
+                @await Html.PartialAsync("FooterPartial", Model)
             </footer>
         </div>
         <script src="/scripts/main.js"></script>

@@ -3,16 +3,17 @@
 @using Umbraco.Cms.Core.Models.PublishedContent
 
 @{
-    var logoImageurl = Model?.Value<IPublishedContent>("logoImage")?.Url() ?? "";
+    var header = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "header");
+    var logoImageurl = header?.Value<IPublishedContent>("logoImage")?.Url() ?? "";
 }
 <section class="header">
     <div class="upper-header">
         <div class="container">
-            <p>@Model?.Value("companyAdress")</p>
+            <p>@header?.Value("companyAdress")</p>
             <div class="social-icons">
-                <a href="@Model?.Value("facebookLink")"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="@Model?.Value("twitterLink")"><i class="fa-brands fa-twitter"></i></a>
-                <a href="@Model?.Value("linkedinLink")"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="@header?.Value("facebookLink")"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="@header?.Value("twitterLink")"><i class="fa-brands fa-twitter"></i></a>
+                <a href="@header?.Value("linkedinLink")"><i class="fa-brands fa-linkedin-in"></i></a>
             </div>
         </div>
     </div>
