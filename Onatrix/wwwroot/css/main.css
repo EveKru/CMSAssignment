@@ -3,12 +3,34 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box; /* Optional but useful for consistent box-sizing */
+    max-width: 100%;
 }
 
 .wrapper {
     height: 100vh;
     display: grid;
     grid-template-rows: auto 1fr auto;
+}
+
+.btn-gray {
+    text-decoration: none;
+    background-color: #4F5955;
+    color: #F2EDDC; /* Yellow text color */
+    padding: 0.8rem;
+    width: 8rem;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+}
+
+h1, h2 {
+    color: #4F5955;
+    font-weight: bold;
+}
+
+h5 {
+    color: #D9C3A9; /* Beige text color */
+    font-weight: bold;
 }
 
 /* Approximate Bootstrap-like Container */
@@ -110,3 +132,49 @@
 }
 /*---------------footer------------------*/
 
+/*---------------hero section------------------*/
+.hero {
+    position: relative;
+    height: 25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.hero img {
+     position: absolute;
+     z-index: -1;
+}
+
+.hero .content {
+    display: flex; /* Make content a flexbox container */
+    flex-direction: column; /* Ensure the content is stacked vertically */
+    gap: 1.5rem; /* Now the gap will work between child elements */
+    width: 50%; /* Set the width of the content */
+    z-index: 1; /* Ensure content appears above the image */
+}
+.hero .content h1 {
+    font-size: 2.5rem;
+}
+/*---------------hero section------------------*/
+
+/*--------------- aboutUs section------------------*/
+.aboutUs {
+    margin-top: 3rem;
+    margin-bottom: 5rem;
+}
+
+.aboutUs .content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 60%
+}
+
+.aboutUs .content h2 {
+    font-size: 2rem;
+    padding-bottom: 1rem;
+}
+
+/*--------------- aboutUs section------------------*/
