@@ -1,0 +1,49 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models.PublishedContent
+@{
+	Layout = "mainLayout.cshtml";
+    ViewBag.title = @Model?.Value("pageTitle") ?? null;
+}
+
+@* ------images------ *@
+
+@{
+    var heroImageurl = Model?.Value<IPublishedContent>("heroImage")?.Url() ?? "";
+    var signatureImageurl = Model?.Value<IPublishedContent>("aboutUsSignatureImage")?.Url() ?? "";
+}
+
+@* ------ hero section ------ *@
+<section class="hero"> 
+    <img src="@heroImageurl" alt="Hero Image" />
+    <div class="container">
+        <div class="content">
+            <h1>@Model?.Value("heroHeadline")</h1>
+            <p>@Model?.Value("heroparagraph")</p>
+            <a class="btn-gray" href="@Model?.Value("heroButtonUrl")">@Model?.Value("heroButtonText")</a>
+        </div>
+    </div>
+</section>
+
+@* ------ aboutUs section------ *@
+<section class="aboutUs">
+    <div class="container">
+        <div class="content">
+            <h5>@Model?.Value("aboutUsTitle")</h5>
+            <h2>@Model?.Value("aboutUsHeadline")</h2>
+            <p style="font-style:oblique; font-size:large;">@Model?.Value("aboutUsQuote")</p>
+            <p>@Model?.Value("aboutUsParagraph")</p>
+            <div class="signature">
+                <img src="@signatureImageurl" />
+                <p style="font-size:small; padding-top: 0.5rem;">@Model?.Value("aboutUsSignatureText")</p>
+            </div>
+        </div>
+        <div class="form">
+            @* will add form later  *@
+        </div>
+    </div>
+</section>
+
+@* ------ partners section------ *@
+@await Html.PartialAsync("PartnersPartial")
+@* ------ partners section------ *@

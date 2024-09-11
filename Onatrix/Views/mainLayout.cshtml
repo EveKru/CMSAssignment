@@ -11,19 +11,19 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://kit.fontawesome.com/a576612222.css" crossorigin="anonymous">
-         <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/main.css">
 		<title>@pageTitle</title>
 	</head>
 	<body>
         <div class="wrapper">
             <header>
-                @await Html.PartialAsync("HeaderPartial", Model)
+                @await Html.PartialAsync("HeaderPartial")
             </header>
             <main>
                 @RenderBody()
             </main>
             <footer>
-                @await Html.PartialAsync("FooterPartial", Model)
+                @await Html.PartialAsync("FooterPartial")
             </footer>
         </div>
         <script src="/scripts/main.js"></script>
