@@ -19,14 +19,14 @@
     </div>
     <div class="lower-header">
         <div class="container">
-            <a href="/home">
+            <a href="/">
                 <img src="@logoImageurl" alt="Onatrix Logo">
             </a>
             <nav class="header-nav">
-                <a href="">About</a>
-                <a href="">Services</a>
-                <a href="">Projects</a>
-                <a href="">Contact</a>
+                <a href="@header?.Value("pageOneUrl")">@header?.Value("pageOneName")</a>
+                <a href="@header?.Value("pageTwoUrl")">@header?.Value("pageTwoName")</a>
+                <a href="@header?.Value("pageThreeUrl")">@header?.Value("pageThreeName")</a>
+                <a href="@header?.Value("pageFourUrl")">@header?.Value("pageFourName")</a>
             </nav>
             <button class="search-btn">
                 <i class="fa-solid fa-magnifying-glass"></i>

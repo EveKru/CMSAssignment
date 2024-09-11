@@ -1,0 +1,8 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models.PublishedContent
+@{
+	Layout = "mainLayout.cshtml";
+     ViewBag.title = @Model?.Value("pageTitle") ?? null;
+}
+<p>services</p>

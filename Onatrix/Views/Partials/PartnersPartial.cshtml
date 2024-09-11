@@ -1,0 +1,28 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IPublishedContent>
+@using Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Cms.Core.Models.PublishedContent
+
+@{
+    // finds the content
+    var partners = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "partners");
+    // Gets images URL
+    var partnerOneImageurl = partners?.Value<IPublishedContent>("partnerOne")?.Url() ?? "";
+    var partnerTwoImageurl = partners?.Value<IPublishedContent>("partnerTwo")?.Url() ?? "";
+    var partnerThreeImageurl = partners?.Value<IPublishedContent>("partnerThree")?.Url() ?? "";
+    var partnerFourImageurl = partners?.Value<IPublishedContent>("partnerFour")?.Url() ?? "";
+    var partnerFiveImageurl = partners?.Value<IPublishedContent>("partnerFive")?.Url() ?? "";
+    var partnerSixImageurl = partners?.Value<IPublishedContent>("partnerSix")?.Url() ?? "";
+}
+
+<section class="partners">
+    <div class="container">
+        <div class="partner-images">
+            <img src="@partnerOneImageurl"/>
+            <img src="@partnerTwoImageurl"/>
+            <img src="@partnerThreeImageurl"/>
+            <img src="@partnerFourImageurl"/>
+            <img src="@partnerFiveImageurl"/>
+            <img src="@partnerSixImageurl"/>
+        </div>
+    </div>
+</section>
