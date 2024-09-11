@@ -8,18 +8,42 @@
 
 @{
     var header = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "header");
-    var logoImageurl = header?.Value<IPublishedContent>("logoImage")?.Url() ?? "";
+    var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "settings");
+    var socialmediaplatforms = settings?.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("socialMediaPlatforms") 
+                               ?? Enumerable.Empty<Umbraco.Cms.Core.Models.Blocks.BlockListItem>();
+    var logoImageurl = header?.Value<IPublishedContent>("logoType")?.Url() ?? "";
 
     var selection = Model.Root().Children.Where(x => x.IsVisible(PublishedValueFallback)).ToArray();
 }
 <section class="header">
     <div class="upper-header">
         <div class="container">
-            <p>@header?.Value("companyAdress")</p>
+            <p>@settings?.Value("companyAdress")</p>
             <div class="social-icons">
-                <a href="@header?.Value("facebookLink")"><i class="fa-brands fa-facebook-f"></i></a>
-                <a href="@header?.Value("twitterLink")"><i class="fa-brands fa-twitter"></i></a>
-                <a href="@header?.Value("linkedinLink")"><i class="fa-brands fa-linkedin-in"></i></a>
+                @foreach (var socialmedia in socialmediaplatforms) {
+                    var platformName = socialmedia.Content.Value<string>("platformName");
+                    var platformUrl = socialmedia.Content.Value<string>("platformUrl");
+                    switch(platformName?.ToLower()) {
+                        case "facebook":
+                            <a href="@platformUrl"><i class="fa-brands fa-facebook-f"></i></a>
+                        break;
+                        case "x":
+                            <a href="@platformUrl"><i class="fa-brands fa-x-twitter"></i></a>
+                        break;
+                        case "linkedin":
+                            <a href="@platformUrl"><i class="fa-brands fa-linkedin-in"></i></a>
+                        break;
+                        case "instagram":
+                            <a href="@platformUrl"><i class="fa-brands fa-instagram"></i></a>
+                        break;
+                        case "youtube":
+                            <a href="@platformUrl"><i class="fa-brands fa-youtube"></i></a>
+                        break;
+                        case "tiktok":
+                            <a href="@platformUrl"><i class="fa-brands fa-tiktok"></i></a>
+                        break;
+                    }
+                }
             </div>
         </div>
     </div>
