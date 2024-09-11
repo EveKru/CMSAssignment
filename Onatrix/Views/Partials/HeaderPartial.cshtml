@@ -1,10 +1,16 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IPublishedContent>
 @using Umbraco.Cms.Web.Common.PublishedModels
 @using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Extensions
+@inject IPublishedValueFallback PublishedValueFallback
+@inject IPublishedUrlProvider PublishedUrlProvider
 
 @{
     var header = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "header");
     var logoImageurl = header?.Value<IPublishedContent>("logoImage")?.Url() ?? "";
+
+    var selection = Model.Root().Children.Where(x => x.IsVisible(PublishedValueFallback)).ToArray();
 }
 <section class="header">
     <div class="upper-header">
@@ -23,10 +29,13 @@
                 <img src="@logoImageurl" alt="Onatrix Logo">
             </a>
             <nav class="header-nav">
-                <a href="@header?.Value("pageOneUrl")">@header?.Value("pageOneName")</a>
-                <a href="@header?.Value("pageTwoUrl")">@header?.Value("pageTwoName")</a>
-                <a href="@header?.Value("pageThreeUrl")">@header?.Value("pageThreeName")</a>
-                <a href="@header?.Value("pageFourUrl")">@header?.Value("pageFourName")</a>
+                @if (selection?.Length > 0)
+                {
+                    @foreach (var item in selection)
+                    {
+                        <a class="@(item.IsAncestorOrSelf(Model) ? "navlink-active" : "navlink")" href="@item.Url(PublishedUrlProvider)">@item.Name</a>
+                    }
+                }
             </nav>
             <button class="search-btn">
                 <i class="fa-solid fa-magnifying-glass"></i>
@@ -34,3 +43,6 @@
         </div>
     </div>
 </section>
+
+
+
