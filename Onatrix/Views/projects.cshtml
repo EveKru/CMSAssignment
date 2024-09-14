@@ -1,5 +1,12 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
-	Layout = "mainLayout.cshtml";
+    Layout = "mainLayout.cshtml";
+    ViewBag.title = @Model?.Value("pageTitle") ?? null;
 }
+
+@* ------ navigation section------ *@
+@await Html.PartialAsync("~/Views/Partials/NavigationPartial.cshtml")
+@* ------ navigation section------ *@
+
+<a href="/projects/juva-inc">juva inc</a>

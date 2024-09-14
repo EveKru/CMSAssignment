@@ -1,0 +1,24 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IPublishedContent>
+@using Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Cms.Core.Models.PublishedContent
+
+@{
+    var partners = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "partners");
+    var partnersLogotypes = partners?.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("addedPartners")
+                       ?? Enumerable.Empty<Umbraco.Cms.Core.Models.Blocks.BlockListItem>();
+}
+
+<section class="partners">
+    <div class="container">
+        <div class="partner-images">
+            @foreach (var partner in partnersLogotypes)
+            {
+                var partnerImage = partner.Content.Value<IPublishedContent>("partnerLogotype");
+                if (partnerImage != null)
+                {
+                    <img src="@partnerImage.Url()" alt="Partner Logo" />
+                }
+            }
+        </div>
+    </div>
+</section>

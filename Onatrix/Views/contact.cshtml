@@ -2,4 +2,15 @@
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
 @{
 	Layout = "mainLayout.cshtml";
+    ViewBag.title = @Model?.Value("pageTitle") ?? null;
 }
+
+@* ------ navigation section------ *@
+@await Html.PartialAsync("~/Views/Partials/NavigationPartial.cshtml")
+@* ------ navigation section------ *@
+
+
+
+@* ------ partners section------ *@
+@await Html.PartialAsync("~/Views/Partials/Sections/PartnersPartial.cshtml")
+@* ------ partners section------ *@

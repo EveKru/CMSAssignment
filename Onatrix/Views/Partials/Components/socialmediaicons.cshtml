@@ -1,0 +1,38 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Cms.Core.Models.PublishedContent
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+@{
+    var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "settings");
+    var socialmediaplatforms = settings?.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("socialMediaPlatforms")
+                           ?? Enumerable.Empty<Umbraco.Cms.Core.Models.Blocks.BlockListItem>();
+}
+
+<div class="socialmediaicons">
+    @foreach (var socialmedia in socialmediaplatforms)
+    {
+        var platformName = socialmedia.Content.Value<string>("platformName");
+        var platformUrl = socialmedia.Content.Value<string>("platformUrl");
+        switch (platformName?.ToLower())
+        {
+            case "facebook":
+                <a href="@platformUrl"><i class="fa-brands fa-facebook-f"></i></a>
+                break;
+            case "x":
+                <a href="@platformUrl"><i class="fa-brands fa-x-twitter"></i></a>
+                break;
+            case "linkedin":
+                <a href="@platformUrl"><i class="fa-brands fa-linkedin-in"></i></a>
+                break;
+            case "instagram":
+                <a href="@platformUrl"><i class="fa-brands fa-instagram"></i></a>
+                break;
+            case "youtube":
+                <a href="@platformUrl"><i class="fa-brands fa-youtube"></i></a>
+                break;
+            case "tiktok":
+                <a href="@platformUrl"><i class="fa-brands fa-tiktok"></i></a>
+                break;
+        }
+    }
+</div>

@@ -1,0 +1,14 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<IPublishedContent>
+@using Umbraco.Cms.Web.Common.PublishedModels
+@using Umbraco.Cms.Core.Models.PublishedContent
+
+<section class="navigation">
+    <div class="container">
+        <div class="content">
+            <h2 style="font-size:2rem">@Model.Value("pageHeadline")</h2>
+            @await Html.PartialAsync("~/Views/Partials/Components/breadcrumb.cshtml")
+        </div>
+    </div>
+</section>
+
+
