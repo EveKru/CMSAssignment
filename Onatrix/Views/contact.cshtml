@@ -1,16 +1,26 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Core.Models.PublishedContent
+
 @{
-	Layout = "mainLayout.cshtml";
-    ViewBag.title = @Model?.Value("pageTitle") ?? null;
+    Layout = "mainLayout.cshtml";
+    ViewBag.title = Model?.Value("pageTitle") ?? null;
+    var renderpartners = Model?.Value<bool>("renderPartners");
+    var pageLayout = Model?.Value<BlockGridModel>("pageLayout"); 
 }
 
 @* ------ navigation section------ *@
 @await Html.PartialAsync("~/Views/Partials/NavigationPartial.cshtml")
-@* ------ navigation section------ *@
+
+@* ------ contact section------ *@
+@await Html.PartialAsync("~/Views/Partials/Sections/ContactPartial.cshtml")
+
+@await Html.GetBlockGridHtmlAsync(pageLayout)
+
+@if (renderpartners == true) {
+    @* ------ partners section------ *@
+    @await Html.PartialAsync("~/Views/Partials/Sections/PartnersPartial.cshtml")
+}
 
 
-
-@* ------ partners section------ *@
-@await Html.PartialAsync("~/Views/Partials/Sections/PartnersPartial.cshtml")
-@* ------ partners section------ *@

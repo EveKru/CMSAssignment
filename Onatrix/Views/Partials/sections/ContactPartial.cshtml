@@ -1,0 +1,15 @@
+﻿@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@using Umbraco.Cms.Core.Models.Blocks
+@using Umbraco.Cms.Web.Common.PublishedModels
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+
+@{
+    // Fetch homepage using UmbracoHelper
+    var homepage = UmbracoHelper.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "home");
+    var contact = homepage?.Children().FirstOrDefault(x => x.ContentType.Alias == "contact");
+    var reusableLayout = contact?.Value<BlockGridModel>("reusableLayout"); 
+}
+
+@await Html.GetBlockGridHtmlAsync(reusableLayout)
+
+
