@@ -1,0 +1,31 @@
+﻿@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@using Umbraco.Cms.Web.Common.PublishedModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+
+@{
+    var homepage = UmbracoHelper.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "home");
+    var projects = homepage?.Children().FirstOrDefault(x => x.ContentType.Alias == "projects");
+    var includeProjectItems = Model?.Content.Value<bool>("includeProjectItems");
+    var projectItems = projects?.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("projectItem")
+                           ?? Enumerable.Empty<Umbraco.Cms.Core.Models.Blocks.BlockListItem>();
+
+    // Sort by "projectDate" and take the first 4 items
+    var sortedProjectItems = projectItems
+        .OrderByDescending(x => x.Content.Value<DateTime>("projectDate"))
+        .Take(4); 
+}
+
+@if (includeProjectItems == true) {
+    @foreach (var projectItem in projectItems) {
+        var projectDate = projectItem.Content.Value<DateTime>("projectDate");
+    
+    } 
+    if (Model.Content.ContentType.Alias == "home") {
+
+
+    }
+    else {
+
+    }
+}

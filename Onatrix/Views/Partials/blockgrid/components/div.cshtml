@@ -1,0 +1,18 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+
+@{
+    var displayFlex = Model?.Content.Value<bool>("displayFlex") == true ? "display-flex" : "";
+    var paddingTop = Model?.Content.Value<bool>("paddingTop") == true ? "div-padding-top" : "";
+    var paddingBottom = Model?.Content.Value<bool>("paddingBottom") == true ? "div-padding-bottom" : "";
+    var paddingLeft = Model?.Content.Value<bool>("paddingLeft") == true ? "div-padding-left" : "";
+    var paddingRight = Model?.Content.Value<bool>("paddingRight") == true ? "div-padding-right" : "";
+    
+    var sectionClasses = $"{displayFlex} {paddingTop} {paddingBottom} {paddingLeft} {paddingRight}";
+}
+
+<div class="@sectionClasses">
+    @* Render the block areas *@
+    @await Html.GetBlockGridItemAreasHtmlAsync(Model)
+</div>

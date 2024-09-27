@@ -6,19 +6,19 @@
 @{
     Layout = "mainLayout.cshtml";
     ViewBag.title = Model?.Value("pageTitle") ?? null;
-    var renderpartners = Model?.Value<bool>("renderPartners");
+}
+
+@{
+    var renderPartners = Model?.Value<bool>("renderPartners");
     var pageLayout = Model?.Value<BlockGridModel>("pageLayout"); 
 }
 
 @* ------ navigation section------ *@
 @await Html.PartialAsync("~/Views/Partials/NavigationPartial.cshtml")
 
-@* ------ contact section------ *@
-@await Html.PartialAsync("~/Views/Partials/Sections/ContactPartial.cshtml")
-
 @await Html.GetBlockGridHtmlAsync(pageLayout)
 
-@if (renderpartners == true) {
+@if (renderPartners == true) {
     @* ------ partners section------ *@
     @await Html.PartialAsync("~/Views/Partials/Sections/PartnersPartial.cshtml")
 }

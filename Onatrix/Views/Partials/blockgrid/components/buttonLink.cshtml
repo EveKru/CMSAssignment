@@ -8,17 +8,18 @@
     var buttonLinkUrl = Model?.Content.Value<string>("buttonLinkUrl");
     var backgroundcolor = Model?.Content.Value<ColorPickerValueConverter.PickedColor>("backgroundcolor")?.Label.ToLower() ?? null;
     var linkTextColor = Model?.Content.Value<ColorPickerValueConverter.PickedColor>("linkTextColor")?.Label.ToLower() ?? null;
+    var backgroundColorClass = !string.IsNullOrEmpty(backgroundcolor) ? $"bg-{backgroundcolor}" : "";
 }
 
 @if (!string.IsNullOrEmpty(backgroundcolor) || !string.IsNullOrEmpty(linkTextColor)) 
 {
-    <div class="padding-top-bottom">
-        <a href="@buttonLinkUrl" class="btn @backgroundcolor @linkTextColor">@buttonLinkText</a>
+    <div class="padding-top padding-bottom">
+        <a href="@buttonLinkUrl" class="btn @backgroundColorClass @linkTextColor">@buttonLinkText</a>
     </div>
 }
 else 
 {
-    <div class="padding-top-bottom">
+    <div class="padding-top padding-bottom">
         <a href="@buttonLinkUrl" class="btn">@buttonLinkText</a>
     </div>
 }

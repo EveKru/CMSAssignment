@@ -1,0 +1,30 @@
+﻿@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@using Umbraco.Cms.Web.Common.PublishedModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+
+@{
+    var homepage = UmbracoHelper.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "home");
+    var services = homepage?.Children().FirstOrDefault(x => x.ContentType.Alias == "services");
+    var includeServiceItems = Model?.Content.Value<bool>("includeServiceItems");
+    var serviceItems = services?.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("serviceItems")
+                           ?? Enumerable.Empty<Umbraco.Cms.Core.Models.Blocks.BlockListItem>();
+}
+
+@if (includeServiceItems == true)
+{
+     <div class="services-grid">
+        @foreach (var serviceItem in serviceItems)
+        {
+            var serviceImage = serviceItem.Content.Value<IPublishedContent>("serviceImage")?.Url() ?? null;
+            var serviceHeadLine = serviceItem.Content.Value<string>("serviceHeadLine");
+            var serviceParagraph = serviceItem.Content.Value<string>("serviceParagraph");
+            var serviceUrl = serviceItem.Content.Value<string>("serviceUrl") ?? "#";
+            <a href="@serviceUrl" class="service-item">
+                <h3>@serviceHeadLine</h3>
+                <img src="@serviceImage" alt="@serviceHeadLine" />
+                <p>@serviceParagraph</p>
+            </a>
+        }
+     </div>
+}

@@ -5,11 +5,10 @@
 
 @{
     var headlineContent = Model?.Content.Value<string>("headlineContent");
-    var centerText = Model?.Content.Value<bool?>("centerText");
     var textColor = Model?.Content.Value<ColorPickerValueConverter.PickedColor>("textColor")?.Label.ToLower() ?? null;
 }
 
 @if (!string.IsNullOrEmpty(headlineContent))
 {
-    <h3 class="@($"{textColor} {(centerText == true ? "center-text" : "")}")">@headlineContent</h3>
+    <h3 class="@textColor">@headlineContent</h3>
 }

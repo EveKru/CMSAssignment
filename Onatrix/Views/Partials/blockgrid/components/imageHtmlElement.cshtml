@@ -5,9 +5,16 @@
 @{
     var selectedImage = Model?.Content.Value<IPublishedContent>("selectedImage")?.Url() ?? null;
     var imageDescription = Model?.Content.Value<string>("imageDescription") ?? "";
+
+    var roundEdges = Model?.Content.Value<bool>("roundEdges") == true ? "round-edges" : "";
+    var roundEdgesTop = Model?.Content.Value<bool>("roundEdgesTop") == true ? "round-edges-top" : "";
+    var roundEdgesBottom = Model?.Content.Value<bool>("roundEdgesBottom") == true ? "round-edges-bottom" : "";
+
+    // Combine all classes
+    var sectionClasses = $"{roundEdges} {roundEdgesTop} {roundEdgesBottom}";
 }
 
 @if (!string.IsNullOrEmpty(selectedImage)) 
 {
-    <img src="@selectedImage" alt="@imageDescription">
+    <img class="@sectionClasses" src="@selectedImage" alt="@imageDescription">
 }

@@ -1,0 +1,54 @@
+﻿@inject Umbraco.Cms.Web.Common.UmbracoHelper UmbracoHelper
+@using Umbraco.Cms.Web.Common.PublishedModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+
+@{
+    var teamMembers = UmbracoHelper.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "teamMembers");
+    var includeTeamMembers = Model?.Content.Value<bool>("includeAllTeamMembers");
+    var members = teamMembers?.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("allTeamMembers")
+                           ?? Enumerable.Empty<Umbraco.Cms.Core.Models.Blocks.BlockListItem>();
+
+    // Split members into two lists
+    var firstRowMembers = members.Take(3); // First 3 members for the first row
+    var secondRowMembers = members.Skip(3); // Remaining members for the second row
+}
+
+@if (includeTeamMembers == true)
+{
+    <div class="team-members">
+        <div class="first-row">
+            @foreach (var member in firstRowMembers)
+            {
+                var memberImage = member.Content.Value<IPublishedContent>("memberImage")?.Url() ?? null;
+                var memberName = member.Content.Value<string>("memberName");
+                var memberJobTitle = member.Content.Value<string>("memberJobTitle");
+
+                <div class="team-member">
+                    <img src="@memberImage" alt="@memberName">
+                    <div class="padding">
+                        <h4>@memberName</h4>
+                        <p>@memberJobTitle</p>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="second-row">
+            @foreach (var member in secondRowMembers)
+            {
+                var memberImage = member.Content.Value<IPublishedContent>("memberImage")?.Url() ?? null;
+                var memberName = member.Content.Value<string>("memberName");
+                var memberJobTitle = member.Content.Value<string>("memberJobTitle");
+
+                <div class="team-member">
+                    <img src="@memberImage" alt="@memberName">
+                    <div class="padding">
+                        <h4>@memberName</h4>
+                        <p>@memberJobTitle</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+

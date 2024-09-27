@@ -1,0 +1,20 @@
+/**umb_name:Increased Line Height**/
+.add-line-height {
+    line-height: 1.9; /* Adjust to your preference */
+}
+      
+      
+/**umb_name:Poppins*/
+.poppins {
+	font-family: 'Poppins', sans-serif;
+}
+
+/**umb_name:Semi-Bold*/
+.semi-bold {
+	font-weight: 600;
+}
+
+/**umb_name:Margin*/
+.add-line-height {
+	line-height: 1.9;
+}

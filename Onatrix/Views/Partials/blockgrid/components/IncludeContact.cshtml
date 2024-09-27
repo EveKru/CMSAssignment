@@ -1,0 +1,27 @@
+﻿@using Umbraco.Cms.Web.Common.PublishedModels
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockGridItem>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+
+@{
+    var settings = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "settings");
+    var includeContactInformation = Model?.Content.Value<bool>("includeContactInformation");
+}
+
+@if (includeContactInformation == true) {
+    <div class="gap-column">
+        <div>
+            <p style="font-weight:bold;"><i style="color: #D9C3A9;" class="fa-solid fa-location-dot"></i> Office location</p>
+            <p>@settings?.Value("companyAdress")</p>
+        </div>
+        <div>
+            <p style="font-weight:bold;"><i style="color: #D9C3A9;" class="fa-solid fa-phone"></i> Phone number</p>
+            <p>@settings?.Value("companyPhone")</p>
+        </div>
+        <div>
+            <p style="font-weight:bold;"><i style="color: #D9C3A9;" class="fa-solid fa-envelope"></i> E-mail address</p>
+            <p>@settings?.Value("companyEmail")</p>
+        </div>
+    </div>
+}
+
+

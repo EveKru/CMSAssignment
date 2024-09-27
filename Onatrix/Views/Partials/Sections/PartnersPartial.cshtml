@@ -3,7 +3,7 @@
 @using Umbraco.Cms.Core.Models.PublishedContent
 
 @{
-    var partners = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "partners");
+    var partners = Umbraco.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "settings");
     var partnersLogotypes = partners?.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("addedPartners")
                        ?? Enumerable.Empty<Umbraco.Cms.Core.Models.Blocks.BlockListItem>();
 }

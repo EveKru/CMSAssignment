@@ -4,10 +4,9 @@
 
 @{
     var quotationContent = Model?.Content.Value<string>("quotationContent");
-    var centerText = Model?.Content.Value<bool?>("centerText"); 
 }
 
 @if (!string.IsNullOrEmpty(quotationContent)) 
 {
-    <p class="quotation @(centerText == true ? "center-text" : "")">“@quotationContent”</p> 
+    <p class="quotation">“@quotationContent”</p> 
 }

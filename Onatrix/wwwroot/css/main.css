@@ -12,68 +12,122 @@
     grid-template-rows: auto 1fr auto;
 }
 
-img {
-    max-width: 100%; /* Ensures the image fits within its container */
-    height: auto; /* Maintains the aspect ratio */
-}
-
 .breadcrumb {
     display: flex;
     gap: 0.5rem;
     list-style: none; /* Removes the bullet points */
 }
 
-/*--------------- padding/margin ------------------*/
-.container {
-    padding: 1rem;
+.display-flex{
+    display:flex;
+    flex-direction: row;
 }
+
+/*--------------- images ------------------*/
+img {
+    max-width: 100%; /* Ensures the image fits within its container */
+    height: auto; /* Maintains the aspect ratio */
+}
+
+.round-edges {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.round-edges-top {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.round-edges-bottom {
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+/*--------------- padding/margin ------------------*/
 
 .padding {
     padding: 1rem;
 }
 
-.padding-top-bottom {
+.padding-top{
     padding-top: 1rem;
+}
+
+.padding-bottom {
     padding-bottom: 1rem;
 }
 
-.padding-left-right {
-    padding-left: 1rem;
-    padding-right: 1rem;
+.div-padding-top {
+    padding-top: 2rem;
 }
 
-.spacing-top {
-    margin-top: 2rem;
+.div-padding-bottom {
+    padding-bottom: 2rem;
 }
 
-.spacing-bottom {
-    margin-bottom: 2rem;
+.div-padding-left {
+    padding-left: 2rem;
 }
 
-.spacing-left {
-    margin-left: 2rem;
+.div-padding-right {
+    padding-right: 2rem;
 }
 
-.spacing-right {
-    margin-right: 2rem;
+.section-padding-top {
+    padding-top: 3rem;
+}
+
+.section-padding-bottom {
+    padding-bottom: 3rem;
+}
+
+.section-spacing-top {
+    margin-top: 3rem;
+}
+
+.section-spacing-bottom {
+    margin-bottom: 3rem;
 }
 
 /*--------------- text ------------------*/
-h1 {
-    font-size: 3.5rem;
+
+ul, ol, blockquote {
+    margin-left: 1rem; /* Adjust as necessary */
+    padding-left: 0.5rem; /* For additional indent if necessary */
+}
+
+p, h1, h2, h3, h4 {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.2; /* Adjust to reduce space */
     color: #4F5955;
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 3rem;
     font-weight: bold;
 }
 
 h2 {
-    font-size: 2.5rem;
-    color: #4F5955;
+    font-size: 2rem;
     font-weight: bold;
 }
 
-h5 {
-    color: #D9C3A9; /* Beige text color */
+h3 {
+    font-size: 1.2rem;
     font-weight: bold;
+}
+
+h4 {
+    font-size: 1rem;
+    font-weight:600;
+}
+
+a {
+    text-decoration: none;
 }
 
 .quotation {
@@ -137,10 +191,12 @@ h5 {
 /*  Umbraco container centering classes */
 section.center-content .umb-block-grid__layout-container {
     place-items: center;
+    text-align: center;
 }
 
 section.center-content-horizontally .umb-block-grid__layout-container {
     justify-items: center;
+    text-align:center;
 }
 
 section.center-content-vertically .umb-block-grid__layout-container {
@@ -183,7 +239,19 @@ section[style*="background-image"] {
 
 /*--------------- colors ------------------*/
 .theme {
-    background-color: #4F5955;
+    color: #4F5955;
+}
+
+.light {
+    color: #F7F7F7;
+}
+
+.white {
+    color:white;
+}
+
+.black{
+    color:black;
 }
 
 .yellow {
@@ -192,6 +260,22 @@ section[style*="background-image"] {
 
 .beige {
     color: #D9C3A9; /* Beige text color */
+}
+
+.bg-theme {
+    background-color: #4F5955;
+}
+
+.bg-yellow {
+    background-color: #4F5955;
+}
+
+.bg-beige {
+    background-color: #4F5955;
+}
+
+.bg-light {
+    background-color: #F7F7F7;
 }
 
 /*--------------- containers ------------------*/
@@ -233,14 +317,14 @@ section[style*="background-image"] {
 
 /*---------------umbraco dynamic containers------------------*/
 .umb-block-grid__layout-container {
-	position: relative;
-	display: grid;
-	grid-template-columns: repeat(var(--umb-block-grid--grid-columns, 1), minmax(0, 1fr));
-	grid-auto-flow: row;
-	grid-auto-rows: minmax(0, min-content);
-
-	column-gap: var(--umb-block-grid--column-gap, 1rem);
-	row-gap: var(--umb-block-grid--row-gap, 1rem);
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(var(--umb-block-grid--grid-columns, 1), minmax(0, 1fr));
+    grid-auto-flow: row;
+    grid-auto-rows: minmax(0, min-content);
+  
+    column-gap: var(--umb-block-grid--column-gap, 1rem);
+    row-gap: var(--umb-block-grid--row-gap, 1rem);
 }
 .umb-block-grid__layout-item {
 	position: relative;
@@ -297,9 +381,12 @@ section[style*="background-image"] {
     display: flex;
     justify-content: space-between;
     background-color: #4F5955;
-    color: white;
     align-items: center;
     height: 3rem;
+}
+
+.header .upper-header .container p {
+    color: white;
 }
 
 .header .lower-header .container {
@@ -353,6 +440,7 @@ section[style*="background-image"] {
 /*--------------- partners section------------------*/
 .partners {
     margin-bottom: 2.5rem;
+    margin-top: 2.5rem;
 }
 .partners .partner-images {
     display: flex;
@@ -362,4 +450,62 @@ section[style*="background-image"] {
 .partners .partner-images img {
     max-width: calc(100% / 6 - 1.5rem); /* "Distribute images evenly" from chatgpt , each image gets a 1/6 of space, with 1.5rem of gap in between*/
 }
+
+
+/*--------------- services section------------------*/
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem; 
+    padding-bottom:1rem;
+}
+
+.service-item {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out; /* Optional hover effect */
+}
+
+.service-item:hover {
+    transform: translateY(-5px); /* Lift the item on hover */
+}
+
+.service-item h3 {
+    padding:1rem;
+}
+
+.service-item p {
+    padding: 1rem;
+}
+
+/*--------------- team members section------------------*/
+
+.team-members {
+    display: grid;
+    gap: 2rem; /* Space between grid items */
+}
+
+.team-members .first-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 1rem; /* Space between grid items */
+}
+
+.team-members .second-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    gap: 1rem; /* Space between grid items */
+}
+
+.team-member {
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    
+}
+
+.team-member p {
+   font-size: 0.8rem;
+   color:gray;
+   padding-top: 0.5rem;
+}
+
 
