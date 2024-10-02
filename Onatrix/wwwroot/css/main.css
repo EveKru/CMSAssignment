@@ -23,6 +23,8 @@
     flex-direction: row;
 }
 
+
+
 /*--------------- images ------------------*/
 img {
     max-width: 100%; /* Ensures the image fits within its container */
@@ -99,11 +101,15 @@ ul, ol, blockquote {
     padding-left: 0.5rem; /* For additional indent if necessary */
 }
 
-p, h1, h2, h3, h4 {
+p, a, h1, h2, h3, h4 {
     font-family: 'Poppins', sans-serif;
     line-height: 1.2; /* Adjust to reduce space */
     color: #4F5955;
     text-decoration: none;
+}
+
+.boldtext {
+    font-weight:700;
 }
 
 h1 {
@@ -463,6 +469,7 @@ section[style*="background-image"] {
 .service-item {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out; /* Optional hover effect */
+    max-width: 16rem; /* Set a max width for items */
 }
 
 .service-item:hover {
@@ -508,4 +515,94 @@ section[style*="background-image"] {
    padding-top: 0.5rem;
 }
 
+/*--------------- recent projects (home) section------------------*/
+.recent-projects-home {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
 
+.recent-project-home-item {
+    position: relative;
+}
+
+.recent-project-home-text {
+    text-align: left;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    transition: height 0.3s ease, background-color 0.3s ease; 
+    height: 4rem; 
+}
+
+.recent-project-home-text h4,
+.recent-project-home-text p {
+    color: white;
+    font-size: small;
+}
+
+.project-link {
+    display: grid;
+    gap: 0.2rem;
+}
+
+.recent-project-home-item:hover .recent-project-home-text {
+    height: 5rem; /* Increase height on hover */
+    background-color: rgba(0, 0, 0, 0.8); /* Change background color on hover */
+}
+
+/*--------------- projects section------------------*/
+
+.project-arrow {
+    display: flex;
+    color: #D9C3A9;
+    gap: 1rem;
+    align-items: center;
+    padding-top: 0.8rem;
+}
+
+.project-item {
+    display:flex;
+    gap:1.5rem;
+}
+
+.project-item img {
+    width: 40%; /* Decrease width to 80% */
+    max-width: 100%; /* Ensure it doesn't exceed the parent container */
+    height: auto; /* Maintain aspect ratio */
+    margin-bottom: 2rem;
+}
+
+.project-text {
+    display: flex;
+    flex-direction:column;
+    gap: 0.5rem;
+}
+
+.project-text a,
+.project-text p{
+    font-size: small;
+}
+
+/*--------------- recent projects (other) section------------------*/
+
+.recent-projects-other img {
+    width: 10rem;
+    height: 5rem;
+}
+
+.recent-project-other-item {
+    display:flex;
+    gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+.recent-project-other-text h4 {
+    font-size: 0.9rem;
+}
+
+.recent-project-other-text p {
+   font-size:0.8rem;
+}

@@ -4,10 +4,12 @@
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
 
 @{
+    var currentPage = Umbraco.AssignedContentItem;
+    var defaultLink = "/";
     var homepage = UmbracoHelper.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "home");
     var projects = homepage?.Children().FirstOrDefault(x => x.ContentType.Alias == "projects");
-    var includeProjectItems = Model?.Content.Value<bool>("includeProjectItems");
-    var projectItems = projects?.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("projectItem")
+    var includeRecentProjectItems = Model?.Content.Value<bool>("includeRecentProjectItems");
+    var projectItems = projects?.Value<IEnumerable<Umbraco.Cms.Core.Models.Blocks.BlockListItem>>("projectItems")
                            ?? Enumerable.Empty<Umbraco.Cms.Core.Models.Blocks.BlockListItem>();
 
     // Sort by "projectDate" and take the first 4 items
@@ -16,16 +18,57 @@
         .Take(4); 
 }
 
-@if (includeProjectItems == true) {
-    @foreach (var projectItem in projectItems) {
-        var projectDate = projectItem.Content.Value<DateTime>("projectDate");
-    
-    } 
-    if (Model.Content.ContentType.Alias == "home") {
+@if (includeRecentProjectItems == true)
+{
+    if (currentPage.ContentType.Alias == "home")
+    {
+        <div class="recent-projects-home">
+            @foreach (var projectItem in sortedProjectItems)
+            {
+                var projectHeadLine = projectItem.Content.Value<string>("projectHeadLine");
+                var customProjectImage = projectItem.Content.Value<IPublishedContent>("customProjectImage")?.Url() ?? null;
+                var projectLink = projectItem.Content.Value<string>("projectLink"); 
 
-
+                <div class="recent-project-home-item">
+                    <img src="@customProjectImage">
+                    <div class="recent-project-home-text">
+                        <a href="@projectLink" class="project-link">
+                            <h4>@projectHeadLine</h4>
+                            <p>Financial Services</p>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
     }
-    else {
+    else
+    {
+        <div class="recent-projects-other">
+            @foreach (var projectItem in sortedProjectItems)
+            {
+                var projectDate = projectItem.Content.Value<DateTime>("projectDate");
+                var projectHeadLine = projectItem.Content.Value<string>("projectHeadLine");
+                var projectLink = projectItem.Content.Value<string>("projectLink");
+                if (string.IsNullOrEmpty(projectLink))
+                {
+                    projectLink = defaultLink; // Use defaultLink if projectLink is null or empty. Would be more ideal to make an " does not exists" page.
+                }
+                var projectImage = projectItem.Content.Value<IPublishedContent>("projectImage")?.Url() ?? null;
 
+                <div class="recent-project-other-item">
+                    <img src="@projectImage" alt="@projectHeadLine">
+                    <div class="recent-project-other-text">
+                        <h4>@projectHeadLine</h4>
+                        <p style="padding-top:0.5rem; padding-bottom:0.5rem;">@projectDate</p>
+                        <a style="padding-top:0;" class="project-arrow" href="@projectLink">
+                            <p style="font-weight:600;">Read more</p>
+                            <i style="font-size: 0.8rem;" class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
     }
 }
+
+

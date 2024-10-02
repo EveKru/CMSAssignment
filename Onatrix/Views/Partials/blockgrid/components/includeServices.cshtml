@@ -4,6 +4,7 @@
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
 
 @{
+    var currentPage = Umbraco.AssignedContentItem;
     var homepage = UmbracoHelper.ContentAtRoot().FirstOrDefault(x => x.ContentType.Alias == "home");
     var services = homepage?.Children().FirstOrDefault(x => x.ContentType.Alias == "services");
     var includeServiceItems = Model?.Content.Value<bool>("includeServiceItems");
@@ -11,20 +12,61 @@
                            ?? Enumerable.Empty<Umbraco.Cms.Core.Models.Blocks.BlockListItem>();
 }
 
+@{
+    var itemsPerPage = 6;
+    var currentPageNumber = int.TryParse(Context.Request.Query["page"].FirstOrDefault(), out var page) ? page : 1;
+    var totalItems = serviceItems?.Count() ?? 0;
+    var totalPages = (int)Math.Ceiling((decimal)totalItems / itemsPerPage);
+    var pagedItems = serviceItems?.Skip((currentPageNumber - 1) * itemsPerPage).Take(itemsPerPage);
+}
+
 @if (includeServiceItems == true)
 {
-     <div class="services-grid">
-        @foreach (var serviceItem in serviceItems)
+    if (pagedItems != null)
+    {
+        <div class="services-grid">
+            @foreach (var serviceItem in pagedItems)
+            {
+                var serviceImage = serviceItem.Content.Value<IPublishedContent>("serviceImage")?.Url() ?? null;
+                var serviceHeadLine = serviceItem.Content.Value<string>("serviceHeadLine");
+                var serviceParagraph = serviceItem.Content.Value<string>("serviceParagraph");
+                var serviceUrl = serviceItem.Content.Value<string>("serviceUrl") ?? "#";
+                <a href="@serviceUrl" class="service-item">
+                    <h3>@serviceHeadLine</h3>
+                    <img src="@serviceImage" alt="@serviceHeadLine" />
+                    <p>@serviceParagraph</p>
+                </a>
+            }
+        </div>
+    }
+    <div class="service-pagination" style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-top:1rem;">
+        @if (currentPageNumber > 1)
         {
-            var serviceImage = serviceItem.Content.Value<IPublishedContent>("serviceImage")?.Url() ?? null;
-            var serviceHeadLine = serviceItem.Content.Value<string>("serviceHeadLine");
-            var serviceParagraph = serviceItem.Content.Value<string>("serviceParagraph");
-            var serviceUrl = serviceItem.Content.Value<string>("serviceUrl") ?? "#";
-            <a href="@serviceUrl" class="service-item">
-                <h3>@serviceHeadLine</h3>
-                <img src="@serviceImage" alt="@serviceHeadLine" />
-                <p>@serviceParagraph</p>
-            </a>
+            <a style="color:#4F5955; font-weight:bold;" href="@currentPage.Url()?page=@(currentPageNumber - 1)">PREV</a>
         }
-     </div>
+        else
+        {
+            <span style="color:lightgray; font-weight:bold;">PREV</span>
+        }
+        @for (var i = 1; i <= totalPages; i++)
+        {
+            if (i == currentPageNumber)
+            {
+                <span style="display: inline-block; width: 2rem; height: 2rem; line-height: 1.7rem; text-align: center; border: 2px solid lightgray; border-radius: 50%; font-weight: bold; color: #4F5955;">@i</span>
+            }
+            else
+            {
+                <span style="color:#4F5955; text-decoration:none; font-weight:bold;">@i</span>
+            }
+        }
+        @if (currentPageNumber < totalPages)
+        {
+            <a style="color:#4F5955; font-weight:bold;" href="@currentPage.Url()?page=@(currentPageNumber + 1)">NEXT</a>
+        }
+        else
+        {
+            <span style="color:lightgray; font-weight:bold;">NEXT</span>
+        }
+    </div>
 }
+

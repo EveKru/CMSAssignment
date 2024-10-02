@@ -5,10 +5,11 @@
 
 @{
     var paragraphContent = Model?.Content.Value<string>("paragraphContent");
-    var textColor = Model?.Content.Value<ColorPickerValueConverter.PickedColor>("textColor")?.Label.ToLower() ?? null;
+    var textColor = Model?.Content.Value<ColorPickerValueConverter.PickedColor>("paragraphColor")?.Label.ToLower() ?? null;
+    var textWeight = Model?.Content.Value<bool>("paragraphBold") == true ? "boldText" : "";
 }
 
 @if (!string.IsNullOrEmpty(paragraphContent)) 
 {
-    <p class="@textColor">@paragraphContent</p> 
+    <p class="@textColor @textWeight">@paragraphContent</p> 
 }
