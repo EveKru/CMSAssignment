@@ -11,12 +11,14 @@
 @{
     var renderPartners = Model?.Value<bool>("renderPartners");
     var pageLayout = Model?.Value<BlockGridModel>("pageLayout"); 
+    var formLayout = Model?.Value<BlockGridModel>("formLayout"); 
 }
 
 @* ------ navigation section------ *@
 @await Html.PartialAsync("~/Views/Partials/NavigationPartial.cshtml")
 
 @await Html.GetBlockGridHtmlAsync(pageLayout)
+@await Html.GetBlockGridHtmlAsync(formLayout)
 
 @if (renderPartners == true) {
     @* ------ partners section------ *@

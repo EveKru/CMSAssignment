@@ -8,20 +8,20 @@
     var paddingBottom = Model?.Content.Value<bool>("paddingBottom") == true ? "div-padding-bottom" : "";
     var paddingLeft = Model?.Content.Value<bool>("paddingLeft") == true ? "div-padding-left" : "";
     var paddingRight = Model?.Content.Value<bool>("paddingRight") == true ? "div-padding-right" : "";
-    var centerContentClass = Model?.Content.Value<bool>("centerContent") == true ? "center-content" : "";
     var boxShadow = Model?.Content.Value<bool>("boxShadow") == true ? "box-shadow" : "";
     var roundEdges = Model?.Content.Value<bool>("roundEdges") == true ? "round-edges" : "";
 
     var BackgroundColorLabel = Model?.Content.Value<ColorPickerValueConverter.PickedColor>("backgroundColor")?.Label.ToLower() ?? "";
     var backgroundColorClass = !string.IsNullOrEmpty(BackgroundColorLabel) ? $"bg-{BackgroundColorLabel}" : "";
     
-    var sectionClasses = $" {centerContentClass} {roundEdges} {boxShadow} {paddingTop} {paddingBottom} {paddingLeft} {paddingRight} {backgroundColorClass}".Trim();
+    var sectionClasses = $" {paddingTop} {roundEdges} {boxShadow} {paddingBottom} {paddingLeft} {paddingRight} {backgroundColorClass}".Trim();
+
 }
 
-<div class="@sectionClasses">
+<form class="@sectionClasses" onsubmit="" novalidate>
     @* Render the block areas *@
     @if (Model != null)
     {
         @await Html.GetBlockGridItemAreasHtmlAsync(Model)
     }
-</div>
+</form>

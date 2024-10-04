@@ -4,18 +4,20 @@
 @using Umbraco.Cms.Core.PropertyEditors.ValueConverters
 
 @{
-    var buttonLinkText = Model?.Content.Value<string>("buttonLinkText");
-    var buttonLinkUrl = Model?.Content.Value<string>("buttonLinkUrl");
+    var buttonText = Model?.Content.Value<string>("buttonText");
+    var buttonType = Model?.Content.Value<string>("buttonType");
     var centerButtonClass = Model?.Content.Value<bool>("centerButton") == true ? "center-content" : "";
     var backgroundcolor = Model?.Content.Value<ColorPickerValueConverter.PickedColor>("backgroundcolor")?.Label.ToLower() ?? null;
     var linkTextColor = Model?.Content.Value<ColorPickerValueConverter.PickedColor>("linkTextColor")?.Label.ToLower() ?? null;
     var backgroundColorClass = !string.IsNullOrEmpty(backgroundcolor) ? $"bg-{backgroundcolor}" : "";
+    var makeButtonFullWidth = Model?.Content.Value<bool>("makeButtonFullWidth") == true ? "full-width" : "";
 }
 
-@if (!string.IsNullOrEmpty(buttonLinkText))
+@if (!string.IsNullOrEmpty(buttonText))
 {
     <div class="@centerButtonClass">
-        <a href="@buttonLinkUrl" class="btn @backgroundColorClass @linkTextColor">@buttonLinkText</a>
+        <button type="@buttonType" class="btn @backgroundColorClass @linkTextColor @makeButtonFullWidth">@buttonText</button>
     </div>
 }
+
 

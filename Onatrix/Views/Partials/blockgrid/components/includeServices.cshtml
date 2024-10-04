@@ -39,34 +39,37 @@
             }
         </div>
     }
-    <div class="service-pagination" style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-top:1rem;">
-        @if (currentPageNumber > 1)
-        {
-            <a style="color:#4F5955; font-weight:bold;" href="@currentPage.Url()?page=@(currentPageNumber - 1)">PREV</a>
-        }
-        else
-        {
-            <span style="color:lightgray; font-weight:bold;">PREV</span>
-        }
-        @for (var i = 1; i <= totalPages; i++)
-        {
-            if (i == currentPageNumber)
+    if (currentPage.ContentType.Alias != "home")
+    {
+        <div class="service-pagination" style="display: flex; align-items: center; gap: 10px; justify-content: center; margin-top:1rem;">
+            @if (currentPageNumber > 1)
             {
-                <span style="display: inline-block; width: 2rem; height: 2rem; line-height: 1.7rem; text-align: center; border: 2px solid lightgray; border-radius: 50%; font-weight: bold; color: #4F5955;">@i</span>
+                <a style="color:#4F5955; font-weight:bold;" href="@currentPage.Url()?page=@(currentPageNumber - 1)">PREV</a>
             }
             else
             {
-                <span style="color:#4F5955; text-decoration:none; font-weight:bold;">@i</span>
+                <span style="color:lightgray; font-weight:bold;">PREV</span>
             }
-        }
-        @if (currentPageNumber < totalPages)
-        {
-            <a style="color:#4F5955; font-weight:bold;" href="@currentPage.Url()?page=@(currentPageNumber + 1)">NEXT</a>
-        }
-        else
-        {
-            <span style="color:lightgray; font-weight:bold;">NEXT</span>
-        }
-    </div>
+            @for (var i = 1; i <= totalPages; i++)
+            {
+                if (i == currentPageNumber)
+                {
+                    <span style="display: inline-block; width: 2rem; height: 2rem; line-height: 1.7rem; text-align: center; border: 2px solid lightgray; border-radius: 50%; font-weight: bold; color: #4F5955;">@i</span>
+                }
+                else
+                {
+                    <span style="color:#4F5955; text-decoration:none; font-weight:bold;">@i</span>
+                }
+            }
+            @if (currentPageNumber < totalPages)
+            {
+                <a style="color:#4F5955; font-weight:bold;" href="@currentPage.Url()?page=@(currentPageNumber + 1)">NEXT</a>
+            }
+            else
+            {
+                <span style="color:lightgray; font-weight:bold;">NEXT</span>
+            }
+        </div>
+    }
 }
 
